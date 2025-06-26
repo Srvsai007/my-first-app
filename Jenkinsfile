@@ -15,12 +15,15 @@ pipeline {
             steps {
                 // Clone the repository
                 git branch: "${BRANCH}", url: "${REPO_URL}"
+				echo 'Repository cloned successfully!'
+				bat 'dir'
             }
         }
 
         stage('Build') {
             steps {
                 // Run Maven build
+				echo 'Starting Maven build...'	
                 bat 'mvn clean install'
             }
         }
