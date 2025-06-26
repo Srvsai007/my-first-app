@@ -75,6 +75,8 @@ pipeline {
                         // Add the JAR file to the repository
                         bat 'git add *.jar'
                         bat 'git commit -m "Add JAR file from Jenkins build"'
+						
+						bat "git push https://github.com/Srvsai007/my-first-app.git ${BRANCH}"
 
                         // Push changes to GitHub using Jenkins credentials
                         withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
