@@ -10,41 +10,44 @@ pipeline {
         BRANCH = 'main'
     }
 
+    options {
+        ansiColor('xterm') // Enables colored output
+        timestamps()       // Adds timestamps to logs
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                // Clone the repository
                 git branch: "${BRANCH}", url: "${REPO_URL}"
-				echo 'Repository cloned successfully!'
-				bat 'dir'
+                echo 'Repository cloned successfully!'
+                bat 'dir'
             }
         }
 
         stage('Build') {
             steps {
-                // Run Maven build
-				echo 'Starting Maven build...'	
+                echo 'Starting Maven build...'
                 bat 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
-                // Run Maven tests
+                echo 'Running tests...'
                 bat 'mvn test'
             }
         }
 
         stage('Package') {
             steps {
-                // Package the application
+                echo 'Packaging application...'
                 bat 'mvn package'
             }
         }
 
         stage('Archive Artifacts') {
             steps {
-                // Archive the JAR file
+                echo 'Archiving artifacts...'
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
