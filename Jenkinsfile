@@ -11,54 +11,67 @@ pipeline {
     }
 
     options {
-        ansiColor('xterm') // Enables colored output
-        timestamps()       // Adds timestamps to logs
+        timestamps() // Adds timestamps to logs
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: "${BRANCH}", url: "${REPO_URL}"
-                echo 'Repository cloned successfully!'
-                bat 'dir'
+                ansiColor('xterm') {
+                    git branch: "${BRANCH}", url: "${REPO_URL}"
+                    echo 'Repository cloned successfully!'
+                    bat 'dir'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Starting Maven build...'
-                bat 'mvn clean install'
+                ansiColor('xterm') {
+                    echo 'Starting Maven build...'
+                    bat 'mvn clean install'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                bat 'mvn test'
+                ansiColor('xterm') {
+                    echo 'Running tests...'
+                    bat 'mvn test'
+                }
             }
         }
 
         stage('Package') {
             steps {
-                echo 'Packaging application...'
-                bat 'mvn package'
+                ansiColor('xterm') {
+                    echo 'Packaging application...'
+                    bat 'mvn package'
+                }
             }
         }
 
         stage('Archive Artifacts') {
             steps {
-                echo 'Archiving artifacts...'
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                ansiColor('xterm') {
+                    echo 'Archiving artifacts...'
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                }
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            ansiColor('xterm') {
+                echo 'Pipeline completed successfully!'
+            }
         }
         failure {
-            echo 'Pipeline failed. Please check the logs.'
+            ansiColor('xterm') {
+                echo 'Pipeline failed. Please check the logs.'
+            }
         }
     }
 }
