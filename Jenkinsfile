@@ -65,23 +65,24 @@ pipeline {
             steps {
                 ansiColor('xterm') {
                     script {
-                        // Copy the JAR file to the root of the repository
-                        bat 'copy target\\*.jar .\artifact\'
+                        // Ensure the artifact directory exists
+                        bat 'mkdir artifact || exit 0'
+
+                        // Copy the JAR file to the artifact directory
+                        bat 'copy target\\*.jar artifact\\'
 
                         // Configure Git
                         bat 'git config user.name "Jenkins"'
                         bat 'git config user.email "jenkins@example.com"'
 
                         // Add the JAR file to the repository
-                        bat 'git add *.jar'
+                        bat 'git add artifact\\*.jar'
                         bat 'git commit -m "Add JAR file from Jenkins build"'
-						
-						bat "git push https://github.com/Srvsai007/my-first-app.git ${BRANCH}"
 
                         // Push changes to GitHub using Jenkins credentials
-                        //withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                          //  bat "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Srvsai007/my-first-app.git ${BRANCH}"
-                        //}
+                        withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                            bat "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Srvsai007/my-first-app.git ${BRANCH}"
+                        }
                     }
                 }
             }
