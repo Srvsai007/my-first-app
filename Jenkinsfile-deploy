@@ -30,7 +30,7 @@ pipeline {
                 ansiColor('xterm') {
                     echo 'Deploying artifact from /artifact Directory'
                     // Run the JAR file in the background
-                    bat 'start-app.bat'
+                    bat 'start start-app.bat'
                 }
             }
         }
