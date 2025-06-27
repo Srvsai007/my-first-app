@@ -28,9 +28,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 ansiColor('xterm') {
-                    echo 'Starting Maven build...'
-                    bat 'cd artifact'
-					bat 'Java -jar my-first-app-0.0.1-SNAPSHOT.jar'
+                    echo 'Deploying artifact from /artifact Directory'
+					bat 'Java -jar /artifact/my-first-app-0.0.1-SNAPSHOT.jar'
                 }
             }
         }
