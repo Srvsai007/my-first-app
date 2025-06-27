@@ -66,7 +66,7 @@ pipeline {
                 ansiColor('xterm') {
                     script {
                         // Copy the JAR file to the root of the repository
-                        bat 'copy target\\*.jar \artifact\'
+                        bat 'copy target\\*.jar .\artifact\'
 
                         // Configure Git
                         bat 'git config user.name "Jenkins"'
