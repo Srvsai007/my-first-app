@@ -79,7 +79,7 @@ pipeline {
                         bat 'git add artifact\\*.jar'
                         bat 'git commit -m "Add JAR file from Jenkins build"'
 						
-						git push https://github.com/Srvsai007/my-first-app.git main 
+						bat 'git push https://github.com/Srvsai007/my-first-app.git main'
                         // Push changes to GitHub using Jenkins credentials
                        // withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                          //   bat "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Srvsai007/my-first-app.git ${BRANCH}"
