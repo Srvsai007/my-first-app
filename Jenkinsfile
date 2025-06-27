@@ -79,9 +79,9 @@ pipeline {
 						bat "git push https://github.com/Srvsai007/my-first-app.git ${BRANCH}"
 
                         // Push changes to GitHub using Jenkins credentials
-                        withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                            bat "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Srvsai007/my-first-app.git ${BRANCH}"
-                        }
+                        //withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                          //  bat "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Srvsai007/my-first-app.git ${BRANCH}"
+                        //}
                     }
                 }
             }
